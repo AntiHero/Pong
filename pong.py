@@ -35,6 +35,20 @@ ball.penup()
 ball.goto(0, 0)
 
 
+def paddle_move(paddle, speed):
+    y = paddle.ycor()
+    y += speed
+    paddle.sety(y)
+
+
+# Keyboard binding
+wn.listen()
+wn.onkeypress(lambda : paddle_move(paddle_a, 20), "w")
+wn.onkeypress(lambda : paddle_move(paddle_a, -20), "s")
+wn.onkeypress(lambda : paddle_move(paddle_b, 20), "Up")
+wn.onkeypress(lambda : paddle_move(paddle_b, -20), "Down")
+
+
 # Main game loop
 while True:
     wn.update()

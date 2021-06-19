@@ -36,7 +36,7 @@ ball.color("white")
 ball.penup()
 ball.goto(0, 0)
 ball.dx = 1
-ball.dy = 1
+ball.dy = .5
 
 
 def paddle_move(paddle, speed):
@@ -65,5 +65,7 @@ while True:
     if ball.ycor() > 290 or ball.ycor() < -290:
         ball.dy *= -1
 
+    # Out of border
     if ball.xcor() > 390 or ball.xcor() < -390:
+        ball.goto(0, 0)
         ball.dx *= -1

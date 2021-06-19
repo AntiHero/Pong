@@ -1,4 +1,5 @@
 import turtle
+import random
 
 WIDTH, HEIGHT = 800, 600
 
@@ -35,14 +36,21 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 1
-ball.dy = .5
+ball.dx = .07
+ball.dy = .01
 
 
 def paddle_move(paddle, speed):
     y = paddle.ycor()
     y += speed
     paddle.sety(y)
+
+    # Paddle border interaction
+    if paddle.ycor() > 250:
+        paddle.sety(250)
+    
+    if paddle.ycor() < -250:
+        paddle.sety(-250)
 
 
 # Keyboard binding
@@ -62,10 +70,16 @@ while True:
     ball.sety(ball.ycor() + ball.dy)
 
     # Border check
-    if ball.ycor() > 290 or ball.ycor() < -290:
+    if ball.ycor() > 285 or ball.ycor() < -285:
         ball.dy *= -1
 
-    # Out of border
+    # Ball out of border
     if ball.xcor() > 390 or ball.xcor() < -390:
         ball.goto(0, 0)
+        ball.dx *= -1
+
+    if ball.xcor() > 330 and ball.xcor() < 340 and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 70):
+        ball.dx *= -1
+
+    if ball.xcor() < -330 and ball.xcor() > -340 and (ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() - 70):
         ball.dx *= -1
